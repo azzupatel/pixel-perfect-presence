@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 30% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 32 60% 70%;
+    --primary-foreground: 220 30% 6%;
+
+    --secondary: 220 20% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 32 50% 55%;
+    --accent-foreground: 220 30% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 32 60% 70%;
+
+    --radius: 0.75rem;
+
+    /* Custom portfolio tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(220 30% 8%) 0%, hsl(220 35% 12%) 50%, hsl(220 30% 6%) 100%);
+    --card-gradient: linear-gradient(145deg, hsl(220 25% 12%) 0%, hsl(220 25% 8%) 100%);
+    --glow-primary: 0 0 40px hsl(32 60% 70% / 0.2);
+    --glow-accent: 0 0 60px hsl(32 50% 55% / 0.15);
+    --text-gradient: linear-gradient(135deg, hsl(32 60% 70%) 0%, hsl(32 50% 55%) 100%);
+
+    --sidebar-background: 220 30% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 32 60% 70%;
+    --sidebar-primary-foreground: 220 30% 6%;
+    --sidebar-accent: 220 20% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 32 60% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-6xl md:text-8xl font-bold tracking-tight;
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-glass {
+    background: var(--card-gradient);
+    @apply backdrop-blur-sm border border-border/50 rounded-xl;
+  }
+
+  .glow-box {
+    box-shadow: var(--glow-primary);
+  }
+
+  .gradient-text {
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2;
+    box-shadow: var(--glow-accent);
+  }
+
+  .skill-bar {
+    @apply h-2 rounded-full bg-secondary overflow-hidden;
+  }
+
+  .skill-bar-fill {
+    @apply h-full rounded-full;
+    background: var(--text-gradient);
+  }
+
+  .nav-link {
+    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg;
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--glow-primary);
+    @apply scale-105;
+  }
+
+  .btn-outline {
+    @apply border border-primary text-primary px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+
+  .btn-outline:hover {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
