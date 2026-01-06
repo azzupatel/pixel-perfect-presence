@@ -1,29 +1,6 @@
-import { useState } from 'react';
-import { Mail, Phone, Linkedin, Instagram, Send, MapPin } from 'lucide-react';
+import { Mail, Phone, Linkedin, Instagram, MapPin } from 'lucide-react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Create mailto link
-    const mailtoLink = `mailto:patelaziz639@gmail.com?subject=${encodeURIComponent(
-      formData.subject
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-    )}`;
-    window.open(mailtoLink);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
     <section id="contact" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-6">
@@ -34,10 +11,10 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
-            <div>
+            <div className="text-center">
               <h3 className="text-2xl font-display font-bold text-foreground mb-6">Get in Touch</h3>
               <p className="text-muted-foreground mb-8">
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
@@ -85,9 +62,9 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div>
+            <div className="text-center">
               <h4 className="text-sm text-muted-foreground mb-4">Connect with me</h4>
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center">
                 <a
                   href="https://www.linkedin.com/in/abdulaziz-patel-424921299"
                   target="_blank"
@@ -107,81 +84,6 @@ const Contact = () => {
               </div>
             </div>
           </div>
-
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="card-glass p-8 rounded-2xl">
-            <h3 className="text-xl font-display font-semibold text-foreground mb-6">Send a Message</h3>
-            
-            <div className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-sm text-muted-foreground mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="John Doe"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm text-muted-foreground mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm text-muted-foreground mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm text-muted-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-                Send Message <Send size={18} />
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </section>
