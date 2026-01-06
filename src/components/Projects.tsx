@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 
 const projects = [
@@ -51,25 +52,52 @@ const projects = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const Projects = () => {
   return (
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-6">
-        <div className="flex items-end justify-between mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.5 }}
+          className="flex items-end justify-between mb-16"
+        >
           <div>
             <h2 className="section-title">PROJECTS</h2>
             <p className="text-muted-foreground mt-4 max-w-xl">
               A showcase of my work including client projects, personal ventures, and academic projects
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <div
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {projects.map((project) => (
+            <motion.div
               key={project.title}
+              variants={cardVariants}
               className="group card-glass rounded-2xl overflow-hidden hover-lift"
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -117,9 +145,9 @@ const Projects = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
