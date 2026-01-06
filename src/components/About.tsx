@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const techStack = [
   { name: 'PHP', icon: '🐘' },
@@ -41,15 +41,33 @@ const techStack = [
   { name: 'Meta Ads', icon: '📣' },
 ];
 
-const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const About = () => {
   return (
-    <section id="about" ref={sectionRef} className="py-24 relative">
+    <section id="about" className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="section-title mb-6">ABOUT</h2>
             <div className="space-y-6 text-muted-foreground">
               <p className="text-lg">
@@ -63,26 +81,39 @@ const About = () => {
                 high-quality websites to results-driven marketing campaigns.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Content - Tech Stack */}
-          <div className="card-glass p-8 rounded-2xl">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="card-glass p-8 rounded-2xl"
+          >
             <h3 className="text-2xl font-display font-bold mb-6 gradient-text">
               💻 Tech Stack
             </h3>
 
-            <div className="flex flex-wrap gap-3">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              className="flex flex-wrap gap-3"
+            >
               {techStack.map((tech) => (
-                <div
+                <motion.div
                   key={tech.name}
+                  variants={itemVariants}
                   className="card-glass px-4 py-2 rounded-lg flex items-center gap-2 hover-lift cursor-default"
                 >
                   <span>{tech.icon}</span>
                   <span className="text-sm font-medium">{tech.name}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

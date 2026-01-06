@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Code, Palette, Search, Megaphone, MousePointerClick, Share2 } from 'lucide-react';
 
 const services = [
@@ -33,23 +34,50 @@ const services = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const Services = () => {
   return (
     <section id="services" className="py-24 bg-secondary/30 relative">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <h2 className="section-title inline-block">SERVICES</h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Comprehensive digital solutions to help your business thrive in the online world
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <div
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {services.map((service) => (
+            <motion.div
               key={service.title}
+              variants={cardVariants}
               className="card-glass p-8 rounded-2xl hover-lift group"
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
                 <service.icon className="w-7 h-7 text-primary" />
@@ -58,9 +86,9 @@ const Services = () => {
                 {service.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
