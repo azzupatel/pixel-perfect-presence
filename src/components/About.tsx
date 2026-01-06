@@ -76,7 +76,7 @@ const About = () => {
                 performance-driven digital products.
               </p>
               <p>
-                As the founder of <span className="text-accent font-medium">Patel Bros Tech</span>, I combine strong
+                As the Co-Founder of <span className="text-accent font-medium">Patel Bros Tech</span>, I combine strong
                 technical expertise with strategic business insight to deliver end-to-end digital solutions—from
                 high-quality websites to results-driven marketing campaigns.
               </p>
